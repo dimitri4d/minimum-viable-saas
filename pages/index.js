@@ -13,7 +13,7 @@ const fetcher = (url, token) =>
 
 async function getProducts() {
   return await db()
-    .collection('product')
+    .collection('products')
     .where('active', '==', true)
     .get()
     .then(unwrapCollection);
@@ -47,7 +47,7 @@ const Index = () => {
       return;
     }
     db()
-      .collection('product')
+      .collection('products')
       .where('active', '==', true)
       .get()
       .then(async function (querySnapshot) {
@@ -84,7 +84,7 @@ const Index = () => {
       });
 
     db()
-      .collection('customer')
+      .collection('customers')
       .doc(user.id)
       .collection('subscriptions')
       .where('status', '==', 'active')
@@ -136,7 +136,7 @@ const Index = () => {
   const subscribe = async (priceId) => {
     setIsLoading(true);
     const thing = await db()
-      .collection('customer')
+      .collection('customers')
       .doc(user.id)
       .collection('checkout_sessions')
       .add({
